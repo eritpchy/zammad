@@ -5557,8 +5557,8 @@ Setting.create_if_not_exists(
         name:      'ticket_organization_reassignment',
         tag:       'boolean',
         options:   {
-          true  => __('Update the most recent tickets'),
-          false => __('Do not update any tickets'),
+          true  => __('Update the most recent tickets.'),
+          false => __('Do not update any tickets.'),
         },
         translate: true,
       },

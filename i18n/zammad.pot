@@ -4178,7 +4178,7 @@ msgid "Do not sign email"
 msgstr ""
 
 #: db/seeds/settings.rb
-msgid "Do not update any tickets"
+msgid "Do not update any tickets."
 msgstr ""
 
 #: app/assets/javascripts/app/views/settings/proxy.jst.eco
@@ -12607,7 +12607,7 @@ msgid "Update successful."
 msgstr ""
 
 #: db/seeds/settings.rb
-msgid "Update the most recent tickets"
+msgid "Update the most recent tickets."
 msgstr ""
 
 #: app/assets/javascripts/app/models/application.coffee

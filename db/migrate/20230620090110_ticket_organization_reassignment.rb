@@ -18,8 +18,8 @@ class TicketOrganizationReassignment < ActiveRecord::Migration[6.1]
             name:      'ticket_organization_reassignment',
             tag:       'boolean',
             options:   {
-              true  => 'Update the most recent tickets',
-              false => 'Do not update any tickets',
+              true  => 'Update the most recent tickets.',
+              false => 'Do not update any tickets.',
             },
             translate: true,
           },
