@@ -20,8 +20,34 @@ RSpec.describe SMIMECertificate, type: :model do
 
         let!(:certificate) { create(:smime_certificate, :with_private, fixture: lookup_address) }
 
-        it 'returns certificate' do
-          expect(described_class.for_sender_email_address(lookup_address)).to eq(certificate)
+        context 'with correct keyUsage flag' do
+          it 'returns the certificate' do
+            expect(described_class.for_sender_email_address(lookup_address)).to eq(certificate)
+          end
+        end
+
+        context 'with wrong keyUsage flag' do
+          before do
+            allow_any_instance_of(OpenSSL::X509::Certificate).to receive(:extensions).and_wrap_original do |original_method, *args, &block|
+              original_method.call(*args, &block).reject { |ext| ext.oid == 'keyUsage' }.append(OpenSSL::X509::Extension.new('keyUsage', 'cRLSign,keyCertSign'))
+            end
+          end
+
+          it 'returns nil' do
+            expect(described_class.for_sender_email_address(lookup_address)).to be_nil
+          end
+        end
+
+        context 'without keyUsage extension present' do
+          before do
+            allow_any_instance_of(OpenSSL::X509::Certificate).to receive(:extensions).and_wrap_original do |original_method, *args, &block|
+              original_method.call(*args, &block).reject { |ext| ext.oid == 'keyUsage' }
+            end
+          end
+
+          it 'returns the certificate' do
+            expect(described_class.for_sender_email_address(lookup_address)).to eq(certificate)
+          end
         end
       end
 
@@ -53,14 +79,14 @@ RSpec.describe SMIMECertificate, type: :model do
     end
   end
 
-  describe 'for_recipipent_email_addresses!' do
+  describe 'for_recipient_email_addresses!' do
 
     context 'no certificate present' do
 
       let(:lookup_addresses) { ['smime1@example.com', 'smime2@example.com'] }
 
       it 'raises ActiveRecord::RecordNotFound' do
-        expect { described_class.for_recipipent_email_addresses!(lookup_addresses) }.to raise_error(ActiveRecord::RecordNotFound)
+        expect { described_class.for_recipient_email_addresses!(lookup_addresses) }.to raise_error(ActiveRecord::RecordNotFound)
       end
     end
 
@@ -75,13 +101,13 @@ RSpec.describe SMIMECertificate, type: :model do
       end
 
       it 'raises ActiveRecord::RecordNotFound' do
-        expect { described_class.for_recipipent_email_addresses!(lookup_addresses) }.to raise_error(ActiveRecord::RecordNotFound)
+        expect { described_class.for_recipient_email_addresses!(lookup_addresses) }.to raise_error(ActiveRecord::RecordNotFound)
       end
 
       context 'exception message' do
 
         let(:message) do
-          described_class.for_recipipent_email_addresses!(lookup_addresses)
+          described_class.for_recipient_email_addresses!(lookup_addresses)
         rescue => e
           e.message
         end
@@ -106,8 +132,34 @@ RSpec.describe SMIMECertificate, type: :model do
         end
       end
 
-      it 'returns certificates' do
-        expect(described_class.for_recipipent_email_addresses!(lookup_addresses)).to include(*certificates)
+      context 'with correct keyUsage flag' do
+        it 'returns certificates' do
+          expect(described_class.for_recipient_email_addresses!(lookup_addresses)).to include(*certificates)
+        end
+      end
+
+      context 'with wrong keyUsage flag' do
+        before do
+          allow_any_instance_of(OpenSSL::X509::Certificate).to receive(:extensions).and_wrap_original do |original_method, *args, &block|
+            original_method.call(*args, &block).reject { |ext| ext.oid == 'keyUsage' }.append(OpenSSL::X509::Extension.new('keyUsage', 'cRLSign,keyCertSign'))
+          end
+        end
+
+        it 'returns nil' do
+          expect { described_class.for_recipient_email_addresses!(lookup_addresses) }.to raise_error(ActiveRecord::RecordNotFound)
+        end
+      end
+
+      context 'without keyUsage flag' do
+        before do
+          allow_any_instance_of(OpenSSL::X509::Certificate).to receive(:extensions).and_wrap_original do |original_method, *args, &block|
+            original_method.call(*args, &block).reject { |ext| ext.oid == 'keyUsage' }
+          end
+        end
+
+        it 'returns certificates' do
+          expect(described_class.for_recipient_email_addresses!(lookup_addresses)).to include(*certificates)
+        end
       end
     end
 
@@ -121,7 +173,7 @@ RSpec.describe SMIMECertificate, type: :model do
       end
 
       it 'returns certificates' do
-        expect(described_class.for_recipipent_email_addresses!(lookup_addresses)).to eq(certificates)
+        expect(described_class.for_recipient_email_addresses!(lookup_addresses)).to eq(certificates)
       end
     end
 
@@ -211,9 +263,9 @@ RSpec.describe SMIMECertificate, type: :model do
       end
     end
 
-    describe '.for_recipipent_email_addresses!' do
+    describe '.for_recipient_email_addresses!' do
       it 'does return the latest certificate when there is also an old expired certificate' do
-        expect(described_class.for_recipipent_email_addresses!(['smime1@example.com']).first.fingerprint).to eq('B')
+        expect(described_class.for_recipient_email_addresses!(['smime1@example.com']).first.fingerprint).to eq('B')
       end
     end
   end
