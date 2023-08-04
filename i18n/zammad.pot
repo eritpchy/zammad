@@ -3516,6 +3516,10 @@ msgid "Defines if the ticket conditions editor supports complex logical expressi
 msgstr ""
 
 #: db/seeds/settings.rb
+msgid "Defines if the ticket conditions editor supports regular expression operators for triggers and ticket auto assignment."
+msgstr ""
+
+#: db/seeds/settings.rb
 msgid "Defines if the time accounting types are enabled."
 msgstr ""
 
@@ -11018,7 +11022,7 @@ msgid "The browser is outdated. It does not support WebSocket - the technology w
 msgstr ""
 
 #: lib/secure_mailing/smime/security_options.rb
-msgid "The certificate for %s was found, but has expired."
+msgid "The certificate for %s was found, but it is not valid yet or has expired."
 msgstr ""
 
 #: lib/secure_mailing/smime/security_options.rb
@@ -11035,6 +11039,14 @@ msgstr ""
 
 #: lib/secure_mailing/smime/incoming.rb
 msgid "The certificate for verification could not be found."
+msgstr ""
+
+#: lib/secure_mailing/smime/certificate.rb
+msgid "The certificate is not valid for S/MIME usage. Please check the certificate format."
+msgstr ""
+
+#: lib/secure_mailing/smime/certificate.rb
+msgid "The certificate is not valid for S/MIME usage. Please check the key usage, subject alternative name and public key cryptographic algorithm."
 msgstr ""
 
 #: app/assets/javascripts/app/views/integration/exchange_certificate_issue.jst.eco
@@ -11271,6 +11283,14 @@ msgstr ""
 
 #: lib/secure_mailing/smime/incoming.rb
 msgid "The private key for decryption could not be found."
+msgstr ""
+
+#: lib/secure_mailing/smime/private_key.rb
+msgid "The private key is not valid for S/MIME usage. Please check the key cryptographic algorithm."
+msgstr ""
+
+#: lib/secure_mailing/smime/private_key.rb
+msgid "The private key is not valid for S/MIME usage. Please check the key format and the secret."
 msgstr ""
 
 #: app/frontend/apps/mobile/pages/account/views/AccountOverview.vue
@@ -11740,7 +11760,7 @@ msgid "There were PGP keys found for %s, but at least one of them has expired."
 msgstr ""
 
 #: lib/secure_mailing/smime/security_options.rb
-msgid "There were certificates found for %s, but at least one of them has expired."
+msgid "There were certificates found for %s, but at least one of them is not valid yet or has expired."
 msgstr ""
 
 #: app/assets/javascripts/app/controllers/_manage/security.coffee
@@ -12059,6 +12079,10 @@ msgstr ""
 
 #: db/seeds/settings.rb
 msgid "Ticket Conditions Expert Mode"
+msgstr ""
+
+#: db/seeds/settings.rb
+msgid "Ticket Conditions Regular Expression Operators"
 msgstr ""
 
 #: app/models/report.rb
@@ -14262,6 +14286,11 @@ msgstr ""
 msgid "does not exist"
 msgstr ""
 
+#: app/assets/javascripts/app/controllers/_ui_element/_application_selector.coffee
+#: app/assets/javascripts/app/controllers/_ui_element/core_workflow_condition.coffee
+msgid "does not match regex"
+msgstr ""
+
 msgid "doesn't match %{attribute}"
 msgstr ""
 
@@ -14686,6 +14715,11 @@ msgstr ""
 msgid "matches found"
 msgstr ""
 
+#: app/assets/javascripts/app/controllers/_ui_element/_application_selector.coffee
+#: app/assets/javascripts/app/controllers/_ui_element/core_workflow_condition.coffee
+msgid "matches regex"
+msgstr ""
+
 #: app/assets/javascripts/app/views/cti/caller_log.jst.eco
 #: app/assets/javascripts/app/views/cti/caller_log_avatar.jst.eco
 #: app/assets/javascripts/app/views/navigation/menu_cti_ringing.jst.eco
@@ -14910,14 +14944,6 @@ msgstr ""
 
 #: app/assets/javascripts/app/views/widget/two_factor_login/try_another_method.jst.eco
 msgid "recovery codes"
-msgstr ""
-
-#: app/assets/javascripts/app/controllers/_ui_element/core_workflow_condition.coffee
-msgid "regex match"
-msgstr ""
-
-#: app/assets/javascripts/app/controllers/_ui_element/core_workflow_condition.coffee
-msgid "regex mismatch"
 msgstr ""
 
 #: app/assets/javascripts/app/controllers/_ui_element/_application_action.coffee
