@@ -5631,7 +5631,6 @@ msgstr ""
 #: app/views/mailer/ticket_create/zh-cn.html.erb
 #: app/views/mailer/ticket_create/zh-tw.html.erb
 #: app/views/messaging/ticket_create/pt-br.md.erb
-#: app/views/messaging/ticket_create/zh-cn.md.erb
 #: app/views/messaging/ticket_create/zh-tw.md.erb
 #: app/views/messaging/ticket_info/pt-br.md.erb
 #: db/seeds/object_manager_attributes.rb
@@ -8426,7 +8425,6 @@ msgstr ""
 #: app/views/mailer/ticket_create/zh-cn.html.erb
 #: app/views/mailer/ticket_create/zh-tw.html.erb
 #: app/views/messaging/ticket_create/pt-br.md.erb
-#: app/views/messaging/ticket_create/zh-cn.md.erb
 #: app/views/messaging/ticket_create/zh-tw.md.erb
 #: app/views/messaging/ticket_info/pt-br.md.erb
 #: db/seeds/object_manager_attributes.rb
@@ -9021,6 +9019,10 @@ msgstr ""
 
 #: app/assets/javascripts/app/controllers/_integration/cti.coffee
 msgid "Queue already exists!"
+msgstr ""
+
+#: app/assets/javascripts/app/views/profile/calendar_subscriptions.jst.eco
+msgid "REST API access using the username/email address and password is currently disabled. Please contact your administrator."
 msgstr ""
 
 #: app/assets/javascripts/app/controllers/ticket_zoom/article_view.coffee
@@ -10525,7 +10527,6 @@ msgstr ""
 #: app/views/mailer/ticket_create/zh-cn.html.erb
 #: app/views/mailer/ticket_create/zh-tw.html.erb
 #: app/views/messaging/ticket_create/pt-br.md.erb
-#: app/views/messaging/ticket_create/zh-cn.md.erb
 #: app/views/messaging/ticket_create/zh-tw.md.erb
 #: app/views/messaging/ticket_info/pt-br.md.erb
 #: db/seeds/object_manager_attributes.rb
